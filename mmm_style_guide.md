@@ -1,22 +1,7 @@
 MMM R Style Guide
 ================
 Mark Lai
-4/9/2020, last updated on 4/16/2020
-
--   [R Code Style](#r-code-style)
-    -   [Naming](#naming)
-    -   [Random number generator](#random-number-generator)
-    -   [Tools that you can use](#tools-that-you-can-use)
-    -   [Functions](#functions)
-    -   [Commenting](#commenting)
-    -   [Track Changes](#track-changes)
-    -   [Git](#git)
-    -   [Code Review](#code-review)
--   [Writing manuscripts](#writing-manuscripts)
-    -   [Reproducibility](#reproducibility)
-    -   [Citation tools](#citation-tools)
-    -   [Spelling and Grammar Check](#spelling-and-grammar-check)
--   [Work Flow](#work-flow)
+4/9/2020, last updated on 08/28/2021
 
 ## R Code Style
 
@@ -25,19 +10,19 @@ guide](https://style.tidyverse.org/). Lab members are welcome to deviate
 slightly from it moving forward, but it has to be consistent throughout
 your work.
 
-> -   Make sure you document your code as much as possible. It’s
->     guaranteed that you won’t remember why you write some code after a
->     few days.
-> -   Put all calls of an external package, i.e., `library()` to the
->     beginning
-> -   Do not include `install.packages()` call in your code
-> -   Generally, do not use dots in naming R objects and functions
->     (e.g., ~~`model.1`~~ → `model_1` or `model1`)
-> -   Use spaces to make your code easier to read to yourself (e.g.,
->     `na.rm = TRUE` rather than `na.rm=TRUE`; see [this
->     section](https://style.tidyverse.org/syntax.html#spacing) in the
->     tidyverse style guide)
-> -   Label the R code chunks
+-   Make sure you document your code as much as possible. It’s
+    guaranteed that you won’t remember why you write some code after a
+    few days.
+-   Put all calls of an external package, i.e., `library()` to the
+    beginning
+-   Do not include `install.packages()` call in your code
+-   Generally, do not use dots in naming R objects and functions (e.g.,
+    ~~`model.1`~~ → `model_1` or `model1`)
+-   Use spaces to make your code easier to read to yourself (e.g.,
+    `na.rm = TRUE` rather than `na.rm=TRUE`; see [this
+    section](https://style.tidyverse.org/syntax.html#spacing) in the
+    tidyverse style guide)
+-   Label the R code chunks
 
 ### Naming
 
@@ -54,8 +39,8 @@ Specifically,
 
 ### Random number generator
 
-> Use `set.seed()` in the beginning to ensure the same numbers are
-> obtained every time you run the results.
+Use `set.seed()` in the beginning to ensure the same numbers are
+obtained every time you run the results.
 
 ### Tools that you can use
 
@@ -65,15 +50,50 @@ Specifically,
 -   [`lintr`](https://github.com/jimhester/lintr): Automated checks to
     confirm whether your script conforms to the style guide.
 
+### Long lines
+
+Try to limit to 80 characters per line. For function call that is too
+long, start a new line for each argument.
+
+``` r
+# Example from https://style.tidyverse.org/syntax.html#long-lines
+# Good
+do_something_very_complicated(
+  something = "that",
+  requires = many,
+  arguments = "some of which may be long"
+)
+
+# Bad
+do_something_very_complicated("that", requires, many, arguments,
+                              "some of which may be long"
+                              )
+```
+
 ### Functions
 
 -   When possible, make sure variables inside a function are passed to
     the function as an argument, not relying on global variables. So
     instead of
 
+``` r
+b <- 10
+foo <- function(a) {
+  a + b
+}
+```
+
 use:
 
+``` r
+foo <- function(a, b = 10) {
+  a + b
+}
+```
+
 ### Commenting
+
+For comment of codes, use one `#` followed by a space.
 
 To add comment on another person’s work in Markdown/R Markdown, use
 
@@ -82,19 +102,28 @@ To add comment on another person’s work in Markdown/R Markdown, use
 Reference:
 <https://stackoverflow.com/questions/4823468/comments-in-markdown>
 
-### Track Changes
+## Track Changes/Version Control
 
-I’m still finding a good track change package or tool for R Markdown.
-One option is the
-[`latexdiffr`](https://github.com/hughjonesd/latexdiffr) package, the
-[`trackmd`](https://github.com/ropenscilabs/trackmd) package, and the
-[`reviewer`](https://docs.ropensci.org/reviewer/) package (haven’t
-tested them out).
+In general, avoid creating multiple versions of the same .R or .Rmd
+file, unless you need both versions at the same time. Instead, use Git
+to track the changes.
 
-Also `git-latexdiff`; see
-<http://www.deanbodenham.com/learn/git-and-latexdiff.html>
+For R code/R Markdown files, a handy tool is the `Diff` button in
+RStudio.
 
-TODO: Test out these packages.
+![](Git-Difff.png)
+
+For writing, you can try the [`latexdiffr`
+package](https://cran.r-project.org/web/packages/latexdiffr/) for PDF
+outputs. Here is an example call
+
+``` r
+latexdiffr::git_latexdiff(
+  "mmm_style_guide.Rmd", 
+  revision = "HEAD^",
+  # Avoid commenting within code chunsk
+  ld_opts = '--add-to-config "VERBATIMENV=Highlighting"')
+```
 
 ### Git
 
@@ -131,7 +160,7 @@ See the source code of some examples of published articles using
 `papaja`
 [here](https://crsh.github.io/papaja_man/published-manuscripts.html)
 
-TODO: Create a template for the journal manuscript.
+See <https://github.com/mmm-usc/apa7-templates> for a template.
 
 ### Reproducibility
 

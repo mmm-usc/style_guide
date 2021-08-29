@@ -23,7 +23,7 @@ To start, please follow [The tidyverse style guide](https://style.tidyverse.org/
 
 ### Naming
 
-R is notorius for not having a convention on how to name variables. Our lab will follow the [convention in the Julia language](https://docs.julialang.org/en/v1/manual/style-guide/index.html#Use-naming-conventions-consistent-with-Julia-base/-1). Specifically, 
+R is notorius for not having a convention on how to name variables. Our lab will follow the [convention in the Julia language](https://docs.julialang.org/en/v1/manual/style-guide/#Use-naming-conventions-consistent-with-Julia-base/). Specifically, 
 
 - Use lowercase letters for naming functions and names (e.g., don't do `TypeI`, but use `typei`). If it's possible to combine words without making it hard to comprehend, then combine them (e.g., `runmodel`, `simdata`, `result1`). Otherwise, use underscoe (not dot) to separate words in names (e.g., `extract_aic`). 
 

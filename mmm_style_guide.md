@@ -209,7 +209,7 @@ TODO: Add examples
 ### Spelling and Grammar Check
 
 -   RStudio has internal spell check (Press `F7`)
--   [`gramr`](https://github.com/ropenscilabs/gramr):
+-   [`gramr`](https://github.com/ropenscilabs/gramr)
 
 ## Work Flow
 

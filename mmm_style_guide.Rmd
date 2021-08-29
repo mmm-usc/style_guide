@@ -166,7 +166,7 @@ Functions that can help:
 
 #### Cross-Referencing
 
-TODO: Add examples
+See https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html
 
 ### Citation tools
 

@@ -170,7 +170,7 @@ TODO: Add examples
 
 ### Citation tools
 
-- Mendeley (considering change to Zotero with concerns on the future of Mendeley)
+- Zotero (lab library: https://www.zotero.org/groups/2460343/mmm-lab-usc)
 
 ### Spelling and Grammar Check
 

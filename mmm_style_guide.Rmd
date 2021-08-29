@@ -95,7 +95,7 @@ For R code/R Markdown files, a handy tool is the `Diff` button in RStudio.
 
 ![](Git-Difff.png)
 
-Or `git diff` in the terminal.
+Or `git diff` in the terminal. See https://git-scm.com/docs/git-diff
 
 For writing, you can try the [`latexdiffr` package](https://cran.r-project.org/web/packages/latexdiffr/) for PDF outputs. Here is an example call
 

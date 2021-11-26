@@ -1,0 +1,170 @@
+---
+title: "The title"
+shorttitle: "Title"
+author: 
+  - name: "First Author"
+    affiliation: "1"
+    corresponding: yes    # Define only one corresponding author
+    address: "Department of Psychology, University of Southern California, 3620 S McClintock Ave., Los Angeles, CA 90089-1061, United States"
+    email: "my@usc.edu"
+    # role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+    #   - Conceptualization
+    #   - Writing - Original Draft Preparation
+    #   - Writing - Review & Editing
+  - name: "Author 2"
+    affiliation: "1,2"
+    # role:
+    #   - Writing - Review & Editing
+    
+affiliation:
+  - id: "1"
+    institution: "\\protect{Department of Psychology, University of Southern California}"  # need protected text
+  - id: "2"
+    institution: "A University Somewhere"
+
+authornote: |
+  \addORCIDlink{First Author}{0000-0000-0000-0000}
+  Enter author note here.
+abstract: |
+  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  
+  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
+  
+  One sentence clearly stating the **general problem** being addressed by  this particular study.
+  
+  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
+  
+  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
+  
+  One or two sentences to put the results into a more **general context**.
+  
+  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
+  
+  
+  <!-- https://tinyurl.com/ybremelq -->
+keywords: "keywords"
+wordcount: "X"
+bibliography: ["r-references.bib"]
+floatsintext: no
+figurelist: no
+tablelist: no
+footnotelist: no
+linenumbers: yes
+mask: no
+draft: no
+header-includes:
+  - |
+    \makeatletter
+    \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+      {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+      {-1em}%
+      {\normalfont\normalsize\bfseries\typesectitle}}
+    
+    \renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+      {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+      {-\z@\relax}%
+      {\normalfont\normalsize\bfseries\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+    \makeatother
+biblio-style: "apa"
+documentclass: "apa7"
+classoption: "man"
+output: 
+  papaja::apa6_pdf:
+    citation_package: biblatex
+    includes:
+      in_header: "preamble.tex"
+  papaja::apa6_word:
+    number_sections: false
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references.bib")
+# Escape semicolon in `papaja::cite_r()`
+# cite_r2 <- function(...) {
+#   out <- papaja::cite_r(...)
+#   gsub(";", "\\\\;", out)
+# }
+# Custom knitr hook to add notes to the plot
+knitr::knit_hooks$set(plot = function(x, options) {
+  size = paste(c(sprintf("width=%s", options$out.width), 
+                 sprintf("height=%s", options$out.height), 
+                 options$out.extra), collapse = ",")
+  size = sprintf("[%s]", size)
+  cap = options$fig.cap
+  lab = paste0(options$fig.lp, options$label)
+  if (length(cap) && !is.na(cap)) {
+    cap = sprintf("\\caption{%s}%s\n", cap, 
+                  knitr:::create_label(lab, latex = TRUE))
+  }
+  note = options$fig.note
+  if (length(note) && !is.na(note)) {
+    note = sprintf("\\figurenote{%s}\n", note)
+  }
+  paste("\\begin{figure}\n",
+        cap,
+        "\\includegraphics", size, "{",
+        knitr::opts_knit$get("base.url"), paste(x, collapse = "."),
+        "}\n",
+        note,
+        "\\end{figure}",
+        sep = '')
+})
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+Although inaccuracy in news is nothing new, so-called fake news---"fabricated information that mimics news media content in form but not in organizational process or intent" (Lazer et al., 2018, p. 1094)---has become a focus of attention in recent years. Fake news represents an important test case for psychologists: What is it about human reasoning that allows people to fall for blatantly false content? Here we consider this question from a dual-process perspective, which distinguishes between intuitive and deliberative cognitive processing (Evans & Stanovich, 2013; Kahneman, 2011). The theory posits that intuition allows for quick automatic responses that are often based on heuristic cues, whereas effortful deliberation can override and correct intuitive responses.
+
+With respect to misinformation and the formation of (in)accurate beliefs, there is substantial debate about the roles of intuitive versus deliberative processes. In particular, there are two major views: the Motivated System 2 Reasoning (MS2R) account and the classical reasoning account. According to the MS2R account, people engage in deliberation to protect their (often political) identities and to defend their preexisting beliefs. As a result, deliberation increases partisan bias (Charness & Dave, 2017; Kahan, 2013, 2017; Kahan et al., 2012; Sloman & Rabb, 2019). In the context of evaluating news, this means that increased deliberation will lead to increased political polarization and decreased ability to discern true from false. Support for this account comes from studies that correlate deliberativeness with polarization. For example, highly numerate people are more likely to be polarized on a number of political issues, including climate change (Kahan et al., 2012) and gun control (Kahan et al., 2017). Furthermore, Kahan et al. (2017) experimentally manipulated the political congruence of information they presented to participants and found that the ratings of highly numerate participants responded more to the congruence manipulation.
+
+The classical account of reasoning, in contrast, argues that when people engage in deliberation, it typically helps uncover the truth (Evans, 2010; Evans & Stanovich, 2013; Pennycook & Rand, 2019a; Shtulman & McCallum, 2014; Stanovich, 2011; Swami et al., 2014). In the context of misinformation, the classical account therefore posits that it is lack of deliberation that promotes belief in fake news, while deliberation results in greater truth discernment (Pennycook & Rand, 2019a). Support for the classical account comes from correlational evidence that people who are dispositionally more deliberative are better able to discern between true and false news headlines, regardless of the ideological alignment of the content (Pennycook & Rand, 2019a; see also Bronstein et al., 2019; Pennycook & Rand, 2019b). Relatedly, it has been shown that people update their prior beliefs when presented with evidence about the scientific consensus regarding anthropogenic climate change, regardless of their prior motivation or political orientation (van der Linden et al., 2018; see also Lewandowsky et al., 2013). It has also been shown that training to detect fake news decreases belief regardless of partisanship (Roozenbeek & van der Linden, 2019a, 2019b). Although the researchers did not directly manipulate deliberation, these results suggest that engaging in reasoning leads to more accurate, rather than more polarized, beliefs.
+
+\begin{equation}
+  f(\bv x) = (2 \pi)^{-\frac{k}{2}} \det(\bv \Sigma)^{-\frac{1}{2}} e^{-\frac{1}{2} (\bv x - \bv \mu)^\top \bv \Sigma^{-1} (\bv x - \bv \mu)}
+\end{equation}
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Data analysis
+
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+### Modeling Approach 1
+
+# Results
+
+Figure \@ref(fig:fig1) shows the results . . . 
+
+```{r fig1, fig.cap = 'Sample plot using', fig.note = 'Generated using the \\texttt{plot()} function.'}
+x <- rnorm(100)
+y <- x + rnorm(100)
+plot(x, y)
+```
+
+Table \@ref(tab:tab1) further shows a summary statistic table. 
+
+```{r tab1}
+my_table <- t(apply(cars, 2, function(x)
+  # Create data
+  round(
+    c(
+      Mean = mean(x),
+      SD = sd(x),
+      Min = min(x),
+      Max = max(x)
+    ), 2
+  )))
+apa_table(my_table,
+          align = c("l", rep("r", 3)),
+          caption = "A summary table of the cars dataset.")
+```
+
+
+# Discussion
+

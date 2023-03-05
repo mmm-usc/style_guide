@@ -60,3 +60,12 @@ It means that there is a merge conflict. One initial strategy to solve it is to
 ## Commit Often
 
 - When a small task is done
+
+## Writing Commit Messages
+
+- https://r-pkgs.org/git.html#commit-best-practices
+
+## Track Changes
+
+- Use the `Diff` tool in RStudio, or `git diff --color-words` in the command line.
+
